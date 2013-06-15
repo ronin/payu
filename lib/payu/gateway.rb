@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 require 'net/http'
-require 'pp'
+require 'net/https'
 
 module Payu
   class Gateway
