@@ -4,6 +4,9 @@ Simple library for accepting payments via PayU.
 
 By [Visuality](http://www.visuality.pl).
 
+[![Build Status](https://api.travis-ci.org/ronin/payu.png?branch=master)](http://travis-ci.org/ronin/payu)
+[![Code Climate](https://codeclimate.com/github/ronin/payu.png)](https://codeclimate.com/github/ronin/payu)
+
 ## Features
 
 * No dependencies on ActiveSupport or any similar libraries, so it should work in any Ruby application or framework
