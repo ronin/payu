@@ -14,14 +14,17 @@ module Payu
       @pos_id   = options[:pos_id]
     end
 
+    # Gets transaction status
     def get(session_id)
       send_request("/paygw/#{encoding}/Payment/get/txt", session_id)
     end
 
+    # Confirms transaction
     def confirm(session_id)
       send_request("/paygw/#{encoding}/Payment/confirm/txt", session_id)
     end
 
+    # Cancels transaction
     def cancel(session_id)
       send_request("/paygw/#{encoding}/Payment/cancel/txt", session_id)
     end

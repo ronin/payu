@@ -22,7 +22,7 @@ module Payu
 
   class << self
 
-    # Loads payments.yml file and creates specified Pos objects
+    # Loads configuration from specified YAML file creates Pos objects
     def load_pos_from_yaml(filename)
       if File.exist?(filename)
         config = YAML.load_file(filename)

@@ -2,6 +2,7 @@
 
 module Payu
   module Helpers
+    # Generates form fields for specified transaction object
     def payu_hidden_fields(transaction)
       html = ""
 
@@ -17,6 +18,7 @@ module Payu
       html.html_safe
     end
 
+    # Verifies signature of passed parameters from Payu request
     def payu_verify_params(params)
       pos_id = params['pos_id']
       pos = Payu[pos_id]

@@ -7,12 +7,15 @@ module Payu
   end
 
   class Signature
-    def self.generate(*params)
-      Digest::MD5.hexdigest(params.join)
+
+    # Generates md5 signature for specified values
+    def self.generate(*values)
+      Digest::MD5.hexdigest(values.join)
     end
 
-    def self.verify!(expected, *params)
-      raise SignatureInvalid if expected != generate(params)
+    # Verifies signature for specified values
+    def self.verify!(expected, *values)
+      raise SignatureInvalid if expected != generate(values)
     end
   end
 end
