@@ -9,7 +9,12 @@ module Payu
       temp = body.gsub("\r", "")
       data = temp.scan(PATTERN)
 
-      new(data)
+      data_hash = {}
+      data.each do |element|
+        data_hash[element[0]] = element[1]
+      end
+
+      new(data_hash)
     end
 
     # Checks if transaction was completed (payment received)
