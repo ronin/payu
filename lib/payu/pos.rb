@@ -20,7 +20,7 @@ module Payu
       @variant       = options[:variant] || 'default'
       @encoding      = options[:encoding] || 'UTF'
       @test_payment  = options[:test_payment] || false
-      @add_signature = options[:add_signature] || false
+      @add_signature = options[:add_signature] || true
 
       raise PosInvalid.new('Missing pos_id parameter') if pos_id.nil? || pos_id == 0
       raise PosInvalid.new('Missing pos_auth_key parameter') if pos_auth_key.nil? || pos_auth_key == ''
@@ -40,10 +40,13 @@ module Payu
         :pos_id => @pos_id,
         :pos_auth_key => @pos_auth_key,
         :key1 => @key1,
-        :add_signature => add_signature?,
         :encoding => encoding,
         :variant => variant
       })
+
+      if !options.has_key?(:add_signature)
+        options[:add_signature] = add_signature?
+      end
 
       if !options.has_key?(:pay_type)
         options[:pay_type] = test_payment? ? 't' : nil

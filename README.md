@@ -1,11 +1,9 @@
-# payu
+# payu [![Gem Version](https://badge.fury.io/rb/payu.png)](http://badge.fury.io/rb/payu) [![Build Status](https://api.travis-ci.org/ronin/payu.png?branch=master)](http://travis-ci.org/ronin/payu) [![Code Climate](https://codeclimate.com/github/ronin/payu.png)](https://codeclimate.com/github/ronin/payu)
+
 
 Simple library for accepting payments via PayU.
 
 By [Visuality](http://www.visuality.pl).
-
-[![Build Status](https://api.travis-ci.org/ronin/payu.png?branch=master)](http://travis-ci.org/ronin/payu)
-[![Code Climate](https://codeclimate.com/github/ronin/payu.png)](https://codeclimate.com/github/ronin/payu)
 
 ## Features
 
@@ -37,7 +35,7 @@ This gem implements only core functionality for integrating with PayU gateway. I
 Your app will interact with PayU via point of sale (Pos). You can create it on PayU website and get its credentials. With these credentials you can create Pos instance:
 
 ```ruby
-pos = Payu::Pos.new :pos_id => '12345', :pos_auth_key => 'abcdefghijk', :key1 => 'xxxxxxxx', :key2 => 'xxxxxxxx'
+pos = Payu::Pos.new :pos_id => '12345', :pos_auth_key => 'abcdefghijk', :key1 => 'xxxxxxxx', :key2 => 'xxxxxxxx', :add_signature => true
 ```
 
 You can also load Pos configuration from yaml file. For example config/payu.yml:
@@ -49,6 +47,7 @@ bank:
   key1: XXX
   key2: XXX
   type: default
+  add_signature: true
 
 sms:
   pos_id: 56789
@@ -56,6 +55,7 @@ sms:
   key1: XXX
   key2: XXX
   type: sms_premium
+  add_signature: false
 ```
 
 Then add new initializer config/initializers/payu.rb:
