@@ -119,7 +119,7 @@ describe 'Transaction' do
     transaction.sig.should == expected_signature
   end
 
-  it "should set amount_netto attribute for sms variant" do
+  it 'should set amount_netto attribute for sms variant' do
     transaction = @sms_pos.new_transaction(
       :session_id => '123',
       :amount => 100,
@@ -132,5 +132,29 @@ describe 'Transaction' do
 
     transaction.amount_netto.should == 100
     transaction.amount.should be_nil
+  end
+
+  it 'should generate url for new payment' do
+    transaction = @pos1.new_transaction(
+      :amount => 100,
+      :desc => 'Description',
+      :first_name => 'John',
+      :last_name => 'Doe',
+      :email => 'john.doe@example.org',
+      :client_ip => '127.0.0.1'
+    )
+    transaction.new_url.should == 'https://www.platnosci.pl/paygw/UTF/NewPayment'
+  end
+
+  it 'should generate url for new sms payment' do
+    transaction = @sms_pos.new_transaction(
+      :amount => 100,
+      :desc => 'Description',
+      :first_name => 'John',
+      :last_name => 'Doe',
+      :email => 'john.doe@example.org',
+      :client_ip => '127.0.0.1'
+    )
+    transaction.new_url.should == 'https://www.platnosci.pl/paygw/UTF/NewSMS'
   end
 end
