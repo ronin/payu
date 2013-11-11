@@ -3,5 +3,7 @@
 .rvmrc
 .ruby-version
 .ruby-gemset
+.DS_Store
 Gemfile.lock
+coverage/*
 pkg/*
