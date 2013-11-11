@@ -52,7 +52,7 @@ module Payu
     end
 
     def prepare_data(session_id)
-      ts  = (Time.now.to_f * 1000).to_i
+      ts  = Timestamp.generate
       sig = Signature.generate(pos_id, session_id, ts, key1)
 
       {

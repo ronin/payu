@@ -4,6 +4,7 @@ require 'yaml'
 
 require 'payu/version'
 require 'payu/pos'
+require 'payu/timestamp'
 require 'payu/transaction'
 require 'payu/response'
 require 'payu/signature'

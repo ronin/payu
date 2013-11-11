@@ -8,7 +8,7 @@ module Payu
       :js, :payback_login, :sig, :ts, :key1, :add_signature, :variant, :encoding
 
     def initialize(options = {})
-      options[:session_id] ||= generate_timestamp
+      options[:session_id] ||= Timestamp.generate
 
       options.each do |name, value|
         send("#{name.to_s}=", value)
@@ -17,7 +17,7 @@ module Payu
       validate!
 
       if options[:add_signature]
-        self.ts = generate_timestamp
+        self.ts = Timestamp.generate
         self.sig = generate_signature
       end
 
@@ -36,10 +36,6 @@ module Payu
     end
 
     private
-    def generate_timestamp
-      (Time.now.to_f * 100).to_i
-    end
-
     def generate_signature
       Signature.generate(
         pos_id,
