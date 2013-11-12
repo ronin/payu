@@ -22,6 +22,10 @@ module Payu
       @test_payment  = options[:test_payment] || false
       @add_signature = options[:add_signature] || true
 
+      validate_options!
+    end
+
+    def validate_options!
       raise PosInvalid.new('Missing pos_id parameter') if pos_id.nil? || pos_id == 0
       raise PosInvalid.new('Missing pos_auth_key parameter') if pos_auth_key.nil? || pos_auth_key == ''
       raise PosInvalid.new('Missing key1 parameter') if key1.nil? || key1 == ''
