@@ -19,8 +19,8 @@ module Payu
       @key2          = options[:key2]
       @variant       = options[:variant] || 'default'
       @encoding      = options[:encoding] || 'UTF'
-      @test_payment  = options[:test_payment] || false
-      @add_signature = options[:add_signature] || true
+      @test_payment  = options.fetch(:test_payment, false)
+      @add_signature = options.fetch(:add_signature, true)
 
       validate_options!
     end
