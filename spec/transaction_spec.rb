@@ -133,7 +133,7 @@ describe 'Transaction' do
             :email => 'john.doe@example.org',
             :client_ip => '127.0.0.1'
         )
-        expect(transaction.sig).to eq nil
+        transaction.sig.should == nil
       end
     end
   end
