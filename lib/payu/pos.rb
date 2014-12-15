@@ -18,7 +18,7 @@ module Payu
       @pos_auth_key  = options[:pos_auth_key]
       @key1          = options[:key1]
       @key2          = options[:key2]
-      @gateway_url   = options[:gateway_url]
+      @gateway_url   = options[:gateway_url] || 'www.platnosci.pl'
       @variant       = options[:variant] || 'default'
       @encoding      = options[:encoding] || 'UTF'
       @test_payment  = options.fetch(:test_payment, false)
@@ -45,6 +45,7 @@ module Payu
       options.merge!({
         :pos_id => @pos_id,
         :pos_auth_key => @pos_auth_key,
+        :gateway_url => options[:gateway_url] || @gateway_url,
         :key1 => @key1,
         :encoding => encoding,
         :variant => variant
