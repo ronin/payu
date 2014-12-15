@@ -71,6 +71,23 @@ describe 'Payu::Gateway' do
     @gateway.cancel(417419).should be_a(Payu::Response)
   end
 
+  it 'should send request to payu.cz endpoint and return Response object' do
+    @gateway = Payu::Gateway.new(
+      :encoding => 'UTF', :key1 => '3d91f185cacad7c1d830d1472dfaacc5',
+      :key2 => 'a747e4b3e49e17459a8a402518d36022',:pos_id => 1,
+      :gateway_url => 'www.payu.cz'
+    )
+
+    stub_request(:post, 'https://www.payu.cz/paygw/UTF/Payment/get/txt').to_return(:body => @get_response_body, :status => 200)
+    @gateway.get(417419).should be_a(Payu::Response)
+
+    stub_request(:post, 'https://www.payu.cz/paygw/UTF/Payment/confirm/txt').to_return(:body => @modify_response_body, :status => 200)
+    @gateway.confirm(417419).should be_a(Payu::Response)
+
+    stub_request(:post, 'https://www.payu.cz/paygw/UTF/Payment/cancel/txt').to_return(:body => @modify_response_body, :status => 200)
+    @gateway.cancel(417419).should be_a(Payu::Response)
+  end
+
   it 'should raise exception on failed connection' do
     stub_request(:post, 'https://www.platnosci.pl/paygw/UTF/Payment/get/txt').to_return(:status => 500)
     lambda { @gateway.get(1) }.should raise_exception(Payu::RequestFailed)
