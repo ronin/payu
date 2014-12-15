@@ -33,6 +33,7 @@ module Payu
             :pos_auth_key => config['pos_auth_key'],
             :key1 => config['key1'],
             :key2 => config['key2'],
+            :gateway_url => config['gateway_url'],
             :variant => config['variant'],
             :add_signature => config['add_signature'],
             :test_payment => config['test_payment']

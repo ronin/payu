@@ -5,13 +5,14 @@ require 'net/https'
 
 module Payu
   class Gateway
-    attr_reader :encoding, :key1, :key2, :pos_id
+    attr_reader :encoding, :key1, :key2, :pos_id, :gateway_url
 
     def initialize(options = {})
-      @encoding = options[:encoding]
-      @key1     = options[:key1]
-      @key2     = options[:key2]
-      @pos_id   = options[:pos_id]
+      @encoding    = options[:encoding]
+      @key1        = options[:key1]
+      @key2        = options[:key2]
+      @pos_id      = options[:pos_id]
+      @gateway_url = options[:gateway_url] || 'www.platnosci.pl'
     end
 
     # Gets transaction status
@@ -32,7 +33,7 @@ module Payu
     private
     def send_request(url, session_id)
       data = prepare_data(session_id)
-      connection = Net::HTTP.new('www.platnosci.pl', 443)
+      connection = Net::HTTP.new(gateway_url, 443)
       connection.use_ssl = true
 
       http_response = connection.start do |http|

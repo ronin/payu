@@ -5,7 +5,8 @@ module Payu
     attr_accessor :pos_id, :pos_auth_key, :pay_type, :session_id, :amount, :amount_netto, :desc,
       :order_id, :desc2, :trsDesc, :first_name, :last_name, :street, :street_hn,
       :street_an, :city, :post_code, :country, :email, :phone, :language, :client_ip,
-      :js, :payback_login, :sig, :ts, :key1, :add_signature, :variant, :encoding
+      :js, :payback_login, :sig, :ts, :key1, :add_signature, :variant, :encoding,
+      :gateway_url
 
     def initialize(options = {})
       options[:session_id] ||= Timestamp.generate
@@ -29,9 +30,9 @@ module Payu
 
     def new_url
       if variant == 'sms'
-        return "https://www.platnosci.pl/paygw/#{encoding}/NewSMS"
+        return "https://#{gateway_url}/paygw/#{encoding}/NewSMS"
       else
-        return "https://www.platnosci.pl/paygw/#{encoding}/NewPayment"
+        return "https://#{gateway_url}/paygw/#{encoding}/NewPayment"
       end
     end
 

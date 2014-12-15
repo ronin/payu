@@ -7,7 +7,8 @@ module Payu
   class Pos
     TYPES = ['default', 'sms']
 
-    attr_reader :pos_id, :pos_auth_key, :key1, :key2, :type, :encoding, :variant
+    attr_reader :pos_id, :pos_auth_key, :key1, :key2, :type, :encoding,
+                :variant, :gateway_url
 
     # Creates new Pos instance
     # @param [Hash] options options hash
@@ -17,6 +18,7 @@ module Payu
       @pos_auth_key  = options[:pos_auth_key]
       @key1          = options[:key1]
       @key2          = options[:key2]
+      @gateway_url   = options[:gateway_url] || 'www.platnosci.pl'
       @variant       = options[:variant] || 'default'
       @encoding      = options[:encoding] || 'UTF'
       @test_payment  = options.fetch(:test_payment, false)
@@ -43,6 +45,7 @@ module Payu
       options.merge!({
         :pos_id => @pos_id,
         :pos_auth_key => @pos_auth_key,
+        :gateway_url => options[:gateway_url] || @gateway_url,
         :key1 => @key1,
         :encoding => encoding,
         :variant => variant
@@ -77,7 +80,13 @@ module Payu
 
     private
     def get_gateway
-      Gateway.new(:encoding => encoding, :key1 => key1, :key2 => key2, :pos_id => pos_id)
+      Gateway.new(
+        :encoding    => encoding,
+        :key1        => key1,
+        :key2        => key2,
+        :pos_id      => pos_id,
+        :gateway_url => gateway_url
+      )
     end
 
     def test_payment?

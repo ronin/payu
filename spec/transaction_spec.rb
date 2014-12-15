@@ -11,6 +11,14 @@ describe 'Transaction' do
       :key2 => 'a747e4b3e49e17459a8a402518d36022'
     )
 
+    @pos_with_gateway = Payu::Pos.new(
+      :pos_id => 1,
+      :pos_auth_key => 'abcde',
+      :gateway_url => 'www.payu.cz',
+      :key1 => '3d91f185cacad7c1d830d1472dfaacc5',
+      :key2 => 'a747e4b3e49e17459a8a402518d36022'
+    )
+
     @pos_unsigned = Payu::Pos.new(
       :pos_id => 1,
       :pos_auth_key => 'abcde',
@@ -163,6 +171,31 @@ describe 'Transaction' do
       :client_ip => '127.0.0.1'
     )
     transaction.new_url.should == 'https://www.platnosci.pl/paygw/UTF/NewPayment'
+  end
+
+  it 'should generate url for new payment with specified gateway url' do
+    transaction = @pos_signed.new_transaction(
+      :amount => 100,
+      :desc => 'Description',
+      :first_name => 'John',
+      :last_name => 'Doe',
+      :email => 'john.doe@example.org',
+      :gateway_url => 'www.payu.cz',
+      :client_ip => '127.0.0.1'
+    )
+    transaction.new_url.should == 'https://www.payu.cz/paygw/UTF/NewPayment'
+  end
+
+  it 'should generate url for new payment wit specified gateway url from POS' do
+    transaction = @pos_with_gateway.new_transaction(
+      :amount => 100,
+      :desc => 'Description',
+      :first_name => 'John',
+      :last_name => 'Doe',
+      :email => 'john.doe@example.org',
+      :client_ip => '127.0.0.1'
+    )
+    transaction.new_url.should == 'https://www.payu.cz/paygw/UTF/NewPayment'
   end
 
   it 'should generate url for new sms payment' do
