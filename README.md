@@ -73,12 +73,31 @@ Payu[12345]
 Payu['56789']
 ```
 
+### Change gateway url
+
+If you are in different country you can change default gateway url (www.platnosci.pl). Just set gateway_url option in YAML configuration file or pass this option to Pos.new.
+
+```yaml
+bank:
+  pos_id: 12345
+  pos_auth_key: XXX
+  key1: XXX
+  key2: XXX
+  type: default
+  add_signature: true
+  gateway_url: 'www.payu.cz'
+```
+
+```ruby
+pos = Payu::Pos.new :pos_id => '12345', :pos_auth_key => 'abcdefghijk', :key1 => 'xxxxxxxx', :key2 => 'xxxxxxxx', :add_signature => true, :gateway_url => 'www.payu.cz'
+```
+
 ### Create new payment
 
 To create new payment:
 
 ```ruby
-@transaction = pos.new_transaction(:first_name => 'John', :last_name => 'Doe', :email => 'john.doe@example.org', :client_ip => '1.2.3.4', :amount => 10000)
+@transaction = pos.new_transaction(:first_name => 'John', :last_name => 'Doe', :email => 'john.doe@example.org', :client_ip => '1.2.3.4', :amount => 10000, :desc => 'Transaction description')
 ```
 
 Now you need to build form with this transaction object:
