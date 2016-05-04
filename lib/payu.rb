@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'yaml'
+require 'erb'
 
 require 'payu/version'
 require 'payu/pos'
@@ -29,14 +30,14 @@ module Payu
         config = YAML.load_file(filename)
         config.each do |name, config|
           pos = Pos.new(
-            :pos_id => config['pos_id'],
-            :pos_auth_key => config['pos_auth_key'],
-            :key1 => config['key1'],
-            :key2 => config['key2'],
-            :gateway_url => config['gateway_url'],
-            :variant => config['variant'],
-            :add_signature => config['add_signature'],
-            :test_payment => config['test_payment']
+            :pos_id => config['pos_id'].blank? ? config['pos_id'] : ERB.new(config['pos_id'].to_s).result,
+            :pos_auth_key => config['pos_auth_key'].blank? ? config['pos_auth_key'] : ERB.new(config['pos_auth_key'].to_s).result,
+            :key1 => config['key1'].blank? ? config['key1'] : ERB.new(config['key1'].to_s).result,
+            :key2 => config['key2'].blank? ? config['key2'] : ERB.new(config['key2'].to_s).result,
+            :gateway_url => config['gateway_url'].blank? ? config['gateway_url'] : ERB.new(config['gateway_url'].to_s).result,
+            :variant => config['variant'].blank? ? config['variant'] : ERB.new(config['variant'].to_s).result,
+            :add_signature => config['add_signature'].blank? ? config['add_signature'] : ERB.new(config['add_signature'].to_s).result,
+            :test_payment => config['test_payment'].blank? ? config['test_payment'] : ERB.new(config['test_payment'].to_s).result
           )
           @@pos_table[name] = pos
         end
