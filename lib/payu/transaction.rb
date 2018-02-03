@@ -10,7 +10,7 @@ module Payu
       options[:session_id] ||= Timestamp.generate
 
       options.each do |name, value|
-        send("#{name.to_s}=", value)
+        send("#{name}=", value)
       end
 
       validate!
@@ -64,7 +64,6 @@ module Payu
       )
     end
 
-    private
     def validate!
       invalid_attributes = []
 

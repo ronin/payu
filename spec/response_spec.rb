@@ -29,25 +29,25 @@ EOF
 
     response = Payu::Response.parse(body)
 
-    response.status.should == 'OK'
-    response.trans_id.should == '7'
-    response.trans_pos_id.should == '1'
-    response.trans_session_id.should == '417419'
-    response.trans_order_id.should == ''
-    response.trans_amount.should == '200'
-    response.trans_status.should == '5'
-    response.trans_pay_type.should == 't'
-    response.trans_pay_gw_name.should == 'pt'
-    response.trans_desc.should == 'Wpłata dla test@test.pl'
-    response.trans_desc2.should == ''
-    response.trans_create.should == '2004-08-2310:39:52'
-    response.trans_init.should == '2004-08-3113:42:43'
-    response.trans_sent.should == '2004-08-3113:48:13'
-    response.trans_recv.should == ''
-    response.trans_cancel.should == ''
-    response.trans_auth_fraud.should == '0'
-    response.trans_ts.should == '1094205761232'
-    response.trans_sig.should == 'b6d68525f724a6d69fb1260874924759'
+    expect(response.status).to eq('OK')
+    expect(response.trans_id).to eq('7')
+    expect(response.trans_pos_id).to eq('1')
+    expect(response.trans_session_id).to eq('417419')
+    expect(response.trans_order_id).to eq('')
+    expect(response.trans_amount).to eq('200')
+    expect(response.trans_status).to eq('5')
+    expect(response.trans_pay_type).to eq('t')
+    expect(response.trans_pay_gw_name).to eq('pt')
+    expect(response.trans_desc).to eq('Wpłata dla test@test.pl')
+    expect(response.trans_desc2).to eq('')
+    expect(response.trans_create).to eq('2004-08-2310:39:52')
+    expect(response.trans_init).to eq('2004-08-3113:42:43')
+    expect(response.trans_sent).to eq('2004-08-3113:48:13')
+    expect(response.trans_recv).to eq('')
+    expect(response.trans_cancel).to eq('')
+    expect(response.trans_auth_fraud).to eq('0')
+    expect(response.trans_ts).to eq('1094205761232')
+    expect(response.trans_sig).to eq('b6d68525f724a6d69fb1260874924759')
   end
 
   it "should parse error response" do
@@ -59,9 +59,9 @@ EOF
 
     response = Payu::Response.parse(body)
 
-    response.status.should == 'ERROR'
-    response.error_nr.should == '103'
-    response.error_message.should == 'Kod błędu: 103'
+    expect(response.status).to eq('ERROR')
+    expect(response.error_nr).to eq('103')
+    expect(response.error_message).to eq('Kod błędu: 103')
   end
 
   it "should respond to completed?" do

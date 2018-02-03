@@ -83,12 +83,12 @@ describe 'Transaction' do
         )
 
         transaction.ts.should_not be_nil
-        transaction.ts.class.should == Fixnum
+        expect(transaction.ts.class).to eq(Fixnum)
 
         signature_keys = [1, '123', 'abcde', 100, 'Description', 'John', 'Doe', 'john.doe@example.org', '127.0.0.1', transaction.ts, '3d91f185cacad7c1d830d1472dfaacc5']
         expected_signature = Digest::MD5.hexdigest(signature_keys.join)
 
-        transaction.sig.should == expected_signature
+        expect(transaction.sig).to eq(expected_signature)
       end
 
       it 'from all keys' do
@@ -124,7 +124,7 @@ describe 'Transaction' do
         ]
         expected_signature = Digest::MD5.hexdigest(signature_keys.join)
 
-        transaction.sig.should == expected_signature
+        expect(transaction.sig).to eq(expected_signature)
       end
     end
 
@@ -139,7 +139,7 @@ describe 'Transaction' do
             email: 'john.doe@example.org',
             client_ip: '127.0.0.1'
         )
-        transaction.sig.should == nil
+        expect(transaction.sig).to be_nil
       end
     end
   end
@@ -155,7 +155,7 @@ describe 'Transaction' do
       client_ip: '127.0.0.1'
     )
 
-    transaction.amount_netto.should == 100
+    expect(transaction.amount_netto).to eq(100)
     transaction.amount.should be_nil
   end
 
