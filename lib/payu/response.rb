@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Payu
   class Response < OpenStruct
     PATTERN = /^(\w+):(?:[ ])?(.*)$/

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Payu
   ERRORS = {
     100 => 'Missing parameter pos_id',

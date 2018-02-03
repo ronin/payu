@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Payu
   module Helpers
     # Generates form fields for specified transaction object
