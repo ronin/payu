@@ -1,8 +1,3 @@
-# encoding: utf-8
-
-require 'simplecov'
-SimpleCov.start
-
 require 'spec_helper'
 require 'webmock/rspec'
 

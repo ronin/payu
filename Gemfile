@@ -4,7 +4,6 @@ source "http://rubygems.org"
 gemspec
 
 group :test do
-  gem 'simplecov'
   gem 'rake'
   gem 'rspec'
   gem 'webmock'

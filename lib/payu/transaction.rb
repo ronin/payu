@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Payu
   class Transaction
     attr_accessor :pos_id, :pos_auth_key, :pay_type, :session_id, :amount, :amount_netto, :desc,
