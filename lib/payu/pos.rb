@@ -41,12 +41,12 @@ module Payu
       options = options.dup
 
       options.merge!({
-        :pos_id => @pos_id,
-        :pos_auth_key => @pos_auth_key,
-        :gateway_url => options[:gateway_url] || @gateway_url,
-        :key1 => @key1,
-        :encoding => encoding,
-        :variant => variant
+        pos_id: @pos_id,
+        pos_auth_key: @pos_auth_key,
+        gateway_url: options[:gateway_url] || @gateway_url,
+        key1: @key1,
+        encoding: encoding,
+        variant: variant
       })
 
       if !options.has_key?(:add_signature)
@@ -79,11 +79,11 @@ module Payu
     private
     def get_gateway
       Gateway.new(
-        :encoding    => encoding,
-        :key1        => key1,
-        :key2        => key2,
-        :pos_id      => pos_id,
-        :gateway_url => gateway_url
+        encoding: encoding,
+        key1: key1,
+        key2: key2,
+        pos_id: pos_id,
+        gateway_url: gateway_url
       )
     end
 

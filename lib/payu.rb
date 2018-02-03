@@ -27,14 +27,14 @@ module Payu
         config = YAML.load_file(filename)
         config.each do |name, config|
           pos = Pos.new(
-            :pos_id => config['pos_id'],
-            :pos_auth_key => config['pos_auth_key'],
-            :key1 => config['key1'],
-            :key2 => config['key2'],
-            :gateway_url => config['gateway_url'],
-            :variant => config['variant'],
-            :add_signature => config['add_signature'],
-            :test_payment => config['test_payment']
+            pos_id: config['pos_id'],
+            pos_auth_key: config['pos_auth_key'],
+            key1: config['key1'],
+            key2: config['key2'],
+            gateway_url: config['gateway_url'],
+            variant: config['variant'],
+            add_signature: config['add_signature'],
+            test_payment: config['test_payment']
           )
           @@pos_table[name] = pos
         end

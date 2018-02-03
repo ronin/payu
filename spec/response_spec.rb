@@ -65,7 +65,7 @@ EOF
   end
 
   it "should respond to completed?" do
-    response = Payu::Response.new(:trans_status => '99')
+    response = Payu::Response.new(trans_status: '99')
     response.should be_completed
   end
 end
