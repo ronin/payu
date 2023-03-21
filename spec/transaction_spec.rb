@@ -54,7 +54,7 @@ describe 'Transaction' do
     )
 
     transaction.session_id.should_not be_nil
-    transaction.session_id.class.should == Fixnum
+    transaction.session_id.class.should == Integer
   end
 
   it 'should not overwrite passed session_id' do
@@ -85,7 +85,7 @@ describe 'Transaction' do
         )
 
         transaction.ts.should_not be_nil
-        transaction.ts.class.should == Fixnum
+        transaction.ts.class.should == Integer
 
         signature_keys = [1, '123', 'abcde', 100, 'Description', 'John', 'Doe', 'john.doe@example.org', '127.0.0.1', transaction.ts, '3d91f185cacad7c1d830d1472dfaacc5']
         expected_signature = Digest::MD5.hexdigest(signature_keys.join)
