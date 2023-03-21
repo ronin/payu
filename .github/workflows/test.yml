@@ -1,0 +1,24 @@
+name: Test
+on:
+  pull_request: {}
+  push: { branches: ['master'] }
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        ruby:
+          - 2.7
+          - '3.0'
+          - 3.1
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Run rspec
+        run: bundle exec rspec
